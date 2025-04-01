@@ -132,7 +132,7 @@ def process_column_and_generate_query(input_string, output_file, log_file, table
 
                 insert_query = (
                     f"INSERT INTO tblextrafields (accountid,columnid, extrafieldtype, extrafieldname, entitytypeid, defaultvalue) "
-                    f"VALUES ({account_id},{column_id}, '{column_type}', '{column_name_full}', {entity_type_id}, '{escaped_default_value}');"
+                    f"VALUES ({account_id},{column_id}, '{column_type}', '{fieldName}', {entity_type_id}, '{escaped_default_value}');"
                 )
 
                 with open(output_file, "a", encoding="utf-8") as file:
@@ -142,7 +142,7 @@ def process_column_and_generate_query(input_string, output_file, log_file, table
                 # Handle other column types
                 insert_query = (
                     f"INSERT INTO tblextrafield (accountid,columnid, extrafieldtype, extrafieldname, entitytypeid, defaultvalue) "
-                    f"VALUES ({account_id},{column_id}, '{column_type}', '{column_name_full}', {entity_type_id}, NULL);"
+                    f"VALUES ({account_id},{column_id}, '{column_type}', '{fieldName}', {entity_type_id}, NULL);"
                 )
                 with open(output_file, "a", encoding="utf-8") as file:
                     file.write(insert_query + "\n")
@@ -274,7 +274,7 @@ def process_column_and_update_query(input_string, Update_file, log_file, mappabl
                 # Generate update query
                 update_query = (
                         f"UPDATE tblextrafields SET defaultvalue='{escaped_default_value}' "
-                        f"WHERE accountid={account_id} AND columnid={column_id} AND entitytypeid={entity_type_id} and extrafieldname='{column_name_full}' ;"
+                        f"WHERE accountid={account_id} AND columnid={column_id} AND entitytypeid={entity_type_id} and extrafieldname='{fieldName}' ;"
                     )
 
                 with open(Update_file, "a", encoding="utf-8") as file:
